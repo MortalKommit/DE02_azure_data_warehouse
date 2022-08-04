@@ -7,7 +7,7 @@ SELECT
     [StationId] = [staging_station].station_id,
     [StationName] = [staging_station].[name],
     [Latitude] = [staging_station].latitude,
-	[Longitude] = longitude
+	[Longitude] = [staging_station].longitude
 FROM [staging_station] 
 
 ALTER TABLE dimStation ALTER COLUMN [StationId] nvarchar(50) NOT NULL;
