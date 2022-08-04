@@ -15,7 +15,7 @@ an integer format, and facts regarding the Trip, including the duration and the 
 While date and times should not be combined, the Date Dimension was chosen to represent date along with the hour as keys
 to allow for hour based granular analysis. The Date Dimension could be denormalized to a Time Dimension (which is recommended) in the Kimball Architecture, however that would not make the schema a Star Schema but rather a Snowflake Schema.
 
-![Bike Share Star Schema](udacity_bike_share_star_schema.png "Star Schema")
+![Bike Share Star Schema](udacity_bike_share_star_schema_updated.png "Star Schema")
 
 
 ## 2. Load from Postgres DB to Azure Blob Storage through One Time Ingest
