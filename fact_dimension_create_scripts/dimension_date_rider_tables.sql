@@ -24,7 +24,7 @@
 DECLARE @StartDate datetime = '2013-01-31';
 DECLARE @CutOffDate datetime = '2022-02-13';
 
-CREATE TABLE #dimdate
+CREATE TABLE #tempDate
 (
   [datetime]   datetime,
   [date]       date, 
@@ -50,7 +50,7 @@ SET DATEFIRST 1;
 
 -- use the catalog views to generate as many rows as we need
 
-INSERT #dimdate([datetime]) 
+INSERT #tempDate([datetime]) 
 SELECT d
 FROM
 (
@@ -67,7 +67,7 @@ FROM
 ) AS y;
 
 
-UPDATE #dimdate 
+UPDATE #tempDate 
 set 
   [date]      =  CAST([datetime] AS date),
   [day]        = DATEPART(DAY,      [datetime]),
@@ -119,10 +119,10 @@ SELECT
                       WHEN 2 THEN 'Second' WHEN 3 THEN 'Third' WHEN 4 THEN 'Fourth' END), 
   [Quarter]         = CONVERT(TINYINT, [quarter]),
   [Year]            = [year]
-FROM #dimdate;
+FROM #tempDate;
 
-ALTER TABLE dimDate ALTER COLUMN DatetimeKey BIGINT NOT NULL;
-ALTER TABLE dimDate add CONSTRAINT dim_date_key PRIMARY KEY NONCLUSTERED (DatetimeKey) NOT ENFORCED;
+ALTER TABLE [dimDate] ALTER COLUMN DatetimeKey BIGINT NOT NULL;
+ALTER TABLE [dimDate] add CONSTRAINT dim_date_key PRIMARY KEY NONCLUSTERED (DatetimeKey) NOT ENFORCED;
 
 CREATE INDEX dim_date_date_actual_idx ON dimDate ([DateActual]);
 CREATE INDEX dim_date_quarter_idx ON dimDate ([Quarter]);
@@ -131,7 +131,7 @@ CREATE INDEX dim_date_day_of_week_idx ON dimDate ([DayOfWeek]);
 CREATE INDEX dim_date_time_of_day_idx ON dimDate ([TimeOfDay]);
 
 
-DROP Table #dimdate;
+DROP Table #tempDate;
 
 
 CREATE TABLE dimRider 

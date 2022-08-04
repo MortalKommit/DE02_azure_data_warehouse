@@ -3,7 +3,7 @@
 ## 1. Design of the Star Schema
 The fact and dimension tables were chosen to reduce the number of JOINS during SELECT queries to simplify the work of  data analysts while performing  analysis of the bike share data.  
 
-The station table was denormalized and included in the Trip Dimension, by performing a join on station_id.
+The stations table was kept as is, to the dimStation table.
 The Date dimension was created by generating hourly datetimes between the maximum and minimum of dates present in all  
 the columns of the data.
 The Rider dimension was created from the Rider table. The Account number field was absent from the data, however, in case
@@ -36,3 +36,11 @@ to allow for hour based granular analysis. The Date Dimension could be denormali
   from Create Table as Select statement and had to be added as a constraint later.
 - The Indexes have been applied considering the business analysis queries. The columns indexes have been applied to speed up
   JOINS.
+
+
+  ### Changelog
+  1.1 
+  - Renamed temporary date table to #tempDate to not confuse reviewer
+  - Included dimStation replacing trip - trip is not a dimension
+  - Updated schema images queries
+      
